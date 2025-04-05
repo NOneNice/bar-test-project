@@ -1,1 +1,5 @@
-<p>cocktail-single works!</p>
+@if (entity) {
+  <app-cocktail-single-card [entity]="entity"></app-cocktail-single-card>
+} @else {
+  {{ notFound }}
+}

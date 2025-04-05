@@ -1,0 +1,27 @@
+<p-card [style]="{ width: '30rem', overflow: 'hidden' }">
+  <ng-template #header>
+    <img
+      alt="Card"
+      height="400px"
+      width="500px"
+      class="w-full"
+      [src]="entity.strDrinkThumb"
+    />
+  </ng-template>
+  <ng-template #title> Название: {{ entity.strDrink }} </ng-template>
+
+  <ng-template #subtitle> Тип бокала: {{ entity.strGlass }} </ng-template>
+
+  <div>
+    Ингридиенты:
+    <ul>
+      @for (ingredient of allIngredients; track $index) {
+        <li>{{ ingredient }}</li>
+      }
+    </ul>
+  </div>
+
+  <div>
+    {{ entity.strInstructions }}
+  </div>
+</p-card>

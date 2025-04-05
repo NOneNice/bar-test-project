@@ -1,5 +1,5 @@
 export interface DrinksDto {
-  drinks: Drink[];
+  drinks: Drink[] | null;
 }
 
 export interface Drink {
@@ -8,5 +8,5 @@ export interface Drink {
   strGlass: string;
   strDrinkThumb: string;
   strInstructions: string;
-  [key: `strIngredient${number}`]: string | undefined;
+  [key: `strIngredient${number}`]: string | null;
 }
