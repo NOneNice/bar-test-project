@@ -1,14 +1,20 @@
-<input
-  type="text"
-  pInputText
-  [formControl]="formControl"
-  placeholder="Введите название коктейля"
-  pSize="large"
-/>
+<p-button routerLink="/">
+  <i class="pi pi-arrow-left" style="font-size: 1.5rem"> </i>
+</p-button>
 
-<p-button [disabled]="formControl.invalid" (click)="submit()">
-  <i class="pi pi-search" style="font-size: 1.5rem"></i>
-</p-button>
-<p-button (click)="random()">
-  <span class="material-symbols-outlined"> shuffle </span>
-</p-button>
+<div class="middle">
+  <input
+    type="text"
+    pInputText
+    [formControl]="formControl"
+    placeholder="Введите название коктейля"
+    pSize="large"
+  />
+
+  <p-button [disabled]="formControl.invalid" (click)="submit()">
+    <i class="pi pi-search" style="font-size: 1.5rem"></i>
+  </p-button>
+  <p-button (click)="random()">
+    <span class="material-symbols-outlined"> shuffle </span>
+  </p-button>
+</div>

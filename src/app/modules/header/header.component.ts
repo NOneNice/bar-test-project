@@ -13,10 +13,11 @@ import {
 } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { BarStore } from '../../store/bar.store';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [InputText, FormsModule, ReactiveFormsModule, Button],
+  imports: [InputText, FormsModule, ReactiveFormsModule, Button, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,

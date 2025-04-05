@@ -1,5 +1,8 @@
 @for (drink of drinks$ | async; track $index) {
-  <p-card [style]="{ width: '20rem', overflow: 'hidden' }">
+  <p-card
+    [routerLink]="['/', drink.idDrink]"
+    [style]="{ width: '20rem', overflow: 'hidden' }"
+  >
     <ng-template #header>
       <img [src]="drink.strDrinkThumb" width="320" height="250" alt="" />
     </ng-template>

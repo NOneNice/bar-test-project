@@ -1,13 +1,16 @@
 :host {
   display: flex;
-  justify-content: center;
-  gap: 5px;
   align-items: center;
-  padding: 10px 0 10px 0;
+  padding: 10px;
   border-bottom: 1px solid;
   background-color: white;
-  position: sticky;
-  top: 1px;
+}
+
+.middle {
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  gap: 5px;
 }
 
 input {

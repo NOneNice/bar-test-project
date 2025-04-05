@@ -10,12 +10,18 @@ export class BarService {
   private readonly http = inject(HttpClient);
   private readonly config = inject(APP_CONFIG);
 
-  private readonly searchUrlByName = this.config.cocktailUrl + 'search.php?s=';
-
   public findCocktailByName(name: DrinkName): Observable<DrinksDto> {
-    return this.http.get<DrinksDto>(this.searchUrlByName + name);
+    return this.http.get<DrinksDto>(
+      this.config.cocktailUrl + 'search.php?s=' + name,
+    );
   }
   public findRandomCocktail(): Observable<DrinksDto> {
     return this.http.get<DrinksDto>(this.config.cocktailUrl + 'random.php');
+  }
+
+  public findById(id: string): Observable<DrinksDto> {
+    return this.http.get<DrinksDto>(
+      this.config.cocktailUrl + 'lookup.php?i=' + id,
+    );
   }
 }
