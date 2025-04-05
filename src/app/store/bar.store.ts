@@ -5,6 +5,7 @@ import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { DrinkName } from '../interface/drink-name';
 import { BarService } from '../service/bar.service';
 import { RANDOM_KEY } from '../const/random-key-state.const';
+import { Drink } from '../interface/drinks.dto';
 
 const initialState: BarState = {
   currentDrinkName: '',
@@ -20,11 +21,12 @@ export class BarStore extends ComponentStore<BarState> {
     (state) => state.loadingStatus === 'loading',
   );
 
-  public readonly drinks$ = this.select(
+  public readonly drinks$: Observable<Drink[]> = this.select(
     (state) => state.drinksMap[state.currentDrinkName],
   ).pipe(
     filter(Boolean),
     map((item) => item.drinks),
+    filter((item) => !!item),
   );
 
   constructor() {
@@ -72,4 +74,12 @@ export class BarStore extends ComponentStore<BarState> {
       ),
     ),
   );
+
+  cleaRandom() {
+    const { [RANDOM_KEY]: _, ...restDrinkMap } = this.state().drinksMap;
+
+    this.patchState({
+      drinksMap: restDrinkMap,
+    });
+  }
 }
