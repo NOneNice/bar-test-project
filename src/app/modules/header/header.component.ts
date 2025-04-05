@@ -13,7 +13,7 @@ import {
 } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { BarStore } from '../../store/bar.store';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -30,9 +30,12 @@ export class HeaderComponent {
   });
   private readonly store = inject(BarStore);
 
+  private readonly router = inject(Router);
+
   @HostListener('document:keydown.enter')
   protected submit() {
     this.store.findByDrinkName(this.formControl.value);
+    this.router.navigate(['/'], { onSameUrlNavigation: 'ignore' });
   }
 
   protected random() {
