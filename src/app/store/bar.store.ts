@@ -1,7 +1,7 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { BarState } from './bar.state';
-import { filter, Observable, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { DrinkName } from '../interface/drink-name';
 import { BarService } from '../service/bar.service';
 import { RANDOM_KEY } from '../const/random-key-state.const';
@@ -18,6 +18,13 @@ export class BarStore extends ComponentStore<BarState> {
 
   public readonly isLoading$ = this.select(
     (state) => state.loadingStatus === 'loading',
+  );
+
+  public readonly drinks$ = this.select(
+    (state) => state.drinksMap[state.currentDrinkName],
+  ).pipe(
+    filter(Boolean),
+    map((item) => item.drinks),
   );
 
   constructor() {
