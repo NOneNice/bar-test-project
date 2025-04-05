@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  inject,
+} from '@angular/core';
 import { InputText } from 'primeng/inputtext';
 import {
   FormControl,
@@ -24,6 +29,7 @@ export class HeaderComponent {
   });
   private readonly store = inject(BarStore);
 
+  @HostListener('document:keydown.enter')
   protected submit() {
     this.store.findByDrinkName(this.formControl.value);
   }
