@@ -12,7 +12,6 @@ import { BarStore } from '../../store/bar.store';
 @Component({
   selector: 'app-header',
   imports: [InputText, FormsModule, ReactiveFormsModule, Button],
-  providers: [BarStore],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,

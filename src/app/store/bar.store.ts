@@ -9,11 +9,16 @@ import { RANDOM_KEY } from '../const/random-key-state.const';
 const initialState: BarState = {
   currentDrinkName: '',
   drinksMap: {},
+  loadingStatus: 'init',
 };
 
 @Injectable()
 export class BarStore extends ComponentStore<BarState> {
   private readonly service = inject(BarService);
+
+  public readonly isLoading$ = this.select(
+    (state) => state.loadingStatus === 'loading',
+  );
 
   constructor() {
     super(initialState);
@@ -29,12 +34,14 @@ export class BarStore extends ComponentStore<BarState> {
           }
         }),
         filter((name) => !this.state().drinksMap[name]),
+        tap(() => this.patchState({ loadingStatus: 'loading' })),
         switchMap((name) =>
           this.service.findCocktailByName(name).pipe(
             tap((res) => {
               this.setState((state) => ({
                 drinksMap: { ...state.drinksMap, [name]: res },
                 currentDrinkName: name,
+                loadingStatus: 'loaded',
               }));
             }),
           ),
@@ -44,12 +51,14 @@ export class BarStore extends ComponentStore<BarState> {
 
   public randomCocktail = this.effect((trigger) =>
     trigger.pipe(
+      tap(() => this.patchState({ loadingStatus: 'loading' })),
       switchMap(() =>
         this.service.findRandomCocktail().pipe(
           tap((res) =>
             this.setState((state) => ({
               drinksMap: { ...state.drinksMap, [RANDOM_KEY]: res },
               currentDrinkName: RANDOM_KEY,
+              loadingStatus: 'loaded',
             })),
           ),
         ),
