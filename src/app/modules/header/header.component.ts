@@ -28,4 +28,8 @@ export class HeaderComponent {
   protected submit() {
     this.store.findByDrinkName(this.formControl.value);
   }
+
+  protected random() {
+    this.store.randomCocktail();
+  }
 }

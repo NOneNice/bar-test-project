@@ -4,6 +4,7 @@ import { BarState } from './bar.state';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 import { DrinkName } from '../interface/drink-name';
 import { BarService } from '../service/bar.service';
+import { RANDOM_KEY } from '../const/random-key-state.const';
 
 const initialState: BarState = {
   currentDrinkName: '',
@@ -39,5 +40,20 @@ export class BarStore extends ComponentStore<BarState> {
           ),
         ),
       ),
+  );
+
+  public randomCocktail = this.effect((trigger) =>
+    trigger.pipe(
+      switchMap(() =>
+        this.service.findRandomCocktail().pipe(
+          tap((res) =>
+            this.setState((state) => ({
+              drinksMap: { ...state.drinksMap, [RANDOM_KEY]: res },
+              currentDrinkName: RANDOM_KEY,
+            })),
+          ),
+        ),
+      ),
+    ),
   );
 }
