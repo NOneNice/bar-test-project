@@ -5,9 +5,12 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
+import { BarStore } from './store/bar.store';
+import { provideComponentStore } from '@ngrx/component-store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideComponentStore(BarStore),
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),

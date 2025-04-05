@@ -6,7 +6,7 @@
   pSize="large"
 />
 
-<p-button>
+<p-button [disabled]="formControl.invalid" (click)="submit()">
   <i class="pi pi-search" style="font-size: 1.5rem"></i>
 </p-button>
 <p-button>
