@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid;
+  background-color: white;
+}
+
+input {
+  flex: 0 1 500px;
+}

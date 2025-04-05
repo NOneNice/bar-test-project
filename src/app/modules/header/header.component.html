@@ -1,1 +1,16 @@
-<p>header works!</p>
+<input
+  type="text"
+  pInputText
+  [formControl]="formControl"
+  placeholder="Введите название коктеля"
+  pSize="large"
+/>
+
+<p-button>
+  <i class="pi pi-search" style="font-size: 1.5rem"></i>
+</p-button>
+<p-button>
+  <span class="material-symbols-outlined"> shuffle </span>
+</p-button>
+
+{{ formControl.value }}
