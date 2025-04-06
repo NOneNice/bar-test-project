@@ -4,7 +4,7 @@
     [style]="{ width: '20rem', overflow: 'hidden' }"
   >
     <ng-template #header>
-      <img [src]="drink.strDrinkThumb" width="320" height="250" alt="" />
+      <img [src]="drink.strDrinkThumb + '/medium'" alt="" />
     </ng-template>
     <ng-template #title> Название: {{ drink.strDrink }} </ng-template>
     <p>Тип бокала: {{ drink.strGlass }}</p>
