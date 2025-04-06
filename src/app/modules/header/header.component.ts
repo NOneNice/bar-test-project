@@ -30,7 +30,7 @@ export class HeaderComponent {
   });
   private readonly store = inject(BarStore);
 
-  private readonly router = inject(Router);
+  protected readonly router = inject(Router);
 
   @HostListener('document:keydown.enter')
   protected submit() {
@@ -39,6 +39,10 @@ export class HeaderComponent {
   }
 
   protected random() {
-    this.store.randomCocktail();
+    if (this.router.url.includes('single')) {
+      this.store.routeToRandomCocktail();
+    } else {
+      this.store.randomCocktail();
+    }
   }
 }

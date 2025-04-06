@@ -6,6 +6,7 @@ import { DrinkName } from '../interface/drink-name';
 import { BarService } from '../service/bar.service';
 import { RANDOM_KEY } from '../const/random-key-state.const';
 import { Drink } from '../interface/drinks.dto';
+import { Router } from '@angular/router';
 
 const initialState: BarState = {
   currentDrinkName: '',
@@ -16,6 +17,8 @@ const initialState: BarState = {
 @Injectable()
 export class BarStore extends ComponentStore<BarState> {
   private readonly service = inject(BarService);
+
+  private readonly router = inject(Router);
 
   public readonly isLoading$ = this.select(
     (state) => state.loadingStatus === 'loading',
@@ -75,11 +78,12 @@ export class BarStore extends ComponentStore<BarState> {
     ),
   );
 
-  cleaRandom() {
-    const { [RANDOM_KEY]: _, ...restDrinkMap } = this.state().drinksMap;
-
-    this.patchState({
-      drinksMap: restDrinkMap,
-    });
-  }
+  routeToRandomCocktail = this.effect((trigger) =>
+    trigger.pipe(
+      switchMap(() => this.service.findRandomCocktail()),
+      switchMap((rndCocktail) =>
+        this.router.navigate(['/', 'single', rndCocktail.drinks![0].idDrink]),
+      ),
+    ),
+  );
 }

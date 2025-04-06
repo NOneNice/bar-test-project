@@ -5,6 +5,7 @@ import { BarService } from './service/bar.service';
 import { inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { LayoutComponent } from './modules/layout/layout.component';
+import { Title } from '@angular/platform-browser';
 
 export const routes: Routes = [
   {
@@ -12,23 +13,34 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
-
       {
         path: 'list',
         component: CocktailListComponent,
       },
       {
-        path: ':id',
+        path: 'single/:id',
         loadComponent: () => CocktailSingleComponent,
         resolve: {
           entity: async (route: ActivatedRouteSnapshot) => {
             const service = inject(BarService);
 
+            const title = inject(Title);
+
             const entity = await firstValueFrom(
               service.findById(route.paramMap.get('id')!),
             );
 
-            return entity.drinks ? entity.drinks[0] : null;
+            if (entity.drinks) {
+              const firstEntit = entity.drinks[0];
+
+              title.setTitle(`Коктель: ${firstEntit.strDrink}`);
+
+              return firstEntit;
+            } else {
+              title.setTitle('Коктейль не был найден');
+
+              return null;
+            }
           },
         },
       },

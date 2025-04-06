@@ -1,5 +1,5 @@
-@if (entity) {
-  <app-cocktail-single-card [entity]="entity"></app-cocktail-single-card>
+@if (entity | async; as value) {
+  <app-cocktail-single-card [entity]="value"></app-cocktail-single-card>
 } @else {
-  {{ notFound }}
+  Коктейль не был найден
 }

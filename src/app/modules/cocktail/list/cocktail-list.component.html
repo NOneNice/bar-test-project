@@ -1,6 +1,6 @@
 @for (drink of drinks$ | async; track $index) {
   <p-card
-    [routerLink]="['/', drink.idDrink]"
+    [routerLink]="['/', 'single', drink.idDrink]"
     [style]="{ width: '20rem', overflow: 'hidden' }"
   >
     <ng-template #header>
